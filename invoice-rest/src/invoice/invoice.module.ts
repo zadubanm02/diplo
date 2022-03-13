@@ -4,7 +4,7 @@ import { Module, forwardRef } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 import { InvoiceModel } from './invoice.model';
 import { InvoiceController } from './invoice.controller';
-import { ItemModule } from 'src/item/item.module';
+import { ItemModule } from '../item/item.module';
 
 @Module({
   imports: [

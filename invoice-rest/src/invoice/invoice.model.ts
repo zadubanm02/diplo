@@ -9,6 +9,7 @@ import {
   ManyToOne,
   ChildEntity,
 } from 'typeorm';
+import { ItemModel } from '../item/item.model';
 
 export enum Currency {
   NGN = 'NGN',
@@ -22,8 +23,8 @@ export enum PaymentStatus {
 }
 
 export class Item {
-  id: string;
   quantity: number;
+  item:ItemModel
 }
 
 

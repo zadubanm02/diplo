@@ -17,13 +17,12 @@ const createInvoice: CreateInvoiceDTO = {
   note: 'Leave money at the reception',
   items: [
     {
-      description: 'Hracka decka',
-      rate: 5,
+      //description: 'Hracka decka',
+      id: "id",
       quantity: 4,
     },
     {
-      description: 'Lopta',
-      rate: 3,
+      id: "id2",
       quantity: 11,
     },
   ],

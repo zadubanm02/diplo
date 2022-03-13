@@ -1,12 +1,12 @@
 import { CustomerService } from './../customer/customer.service';
-import { InvoiceModel } from './invoice.model';
+import { InvoiceModel, Item } from './invoice.model';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateInvoiceDTO } from './invoice.dto';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { ItemService } from 'src/item/item.service';
+import { ItemService } from '../item/item.service';
 
 @Injectable()
 export class InvoiceService {
@@ -30,6 +30,15 @@ export class InvoiceService {
     const total = subTotal + taxAmount;
     const outstandingBalance = total;
 
+    const itemsArray:Item[] = items.map(item => {
+      const found = invoice.items.find(it => it.id === item.id)
+      return {
+        quantity:found.quantity,
+        item
+      }
+    }
+    )
+
     this.logger.log('info', { taxAmount, total, subTotal, outstandingBalance });
 
     console.log(
@@ -41,8 +50,30 @@ export class InvoiceService {
       outstandingBalance,
     );
 
+    console.log("Item", {
+      ...invoice,
+      items:itemsArray,
+      customer,
+      subTotal,
+      taxAmount,
+      total,
+      outstandingBalance,
+     })
+
+    this.logger.log('info', {
+      ...invoice,
+      items:itemsArray,
+      customer,
+      subTotal,
+      taxAmount,
+      total,
+      outstandingBalance,
+     });
+
+
     return this.invoiceRepository.save({
       ...invoice,
+      items:itemsArray,
       customer,
       subTotal,
       taxAmount,

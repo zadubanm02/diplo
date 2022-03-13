@@ -15,5 +15,5 @@ taxRate: number;
 issueDate: Date;
 dueDate: Date;
 note: string;
-items: Array<Item>;
+items: Array<ItemDTO>;
 }
