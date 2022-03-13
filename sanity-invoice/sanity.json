@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "project": {
+    "name": "invoiceapp"
+  },
+  "api": {
+    "projectId": "q3dcx756",
+    "dataset": "invoices"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/google-maps-input"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    }
+  ]
+}
