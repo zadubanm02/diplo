@@ -5,9 +5,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinColumn,
   ManyToOne,
-  ChildEntity,
 } from 'typeorm';
 import { ItemModel } from '../item/item.model';
 

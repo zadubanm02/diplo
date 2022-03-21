@@ -39,27 +39,6 @@ export class InvoiceService {
     }
     )
 
-    this.logger.log('info', { taxAmount, total, subTotal, outstandingBalance });
-
-    console.log(
-      'Tax amount',
-      taxAmount,
-      'Totoal',
-      total,
-      subTotal,
-      outstandingBalance,
-    );
-
-    console.log("Item", {
-      ...invoice,
-      items:itemsArray,
-      customer,
-      subTotal,
-      taxAmount,
-      total,
-      outstandingBalance,
-     })
-
     this.logger.log('info', {
       ...invoice,
       items:itemsArray,

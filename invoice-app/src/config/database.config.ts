@@ -3,17 +3,15 @@ import dotenv from 'dotenv'
 dotenv.config();
 const database = {
     development:   {
-      type: "postgres",
-      host: "localhost",
+      type: 'postgres',
+      host: 'localhost',
       port: 5432,
-      username: "godwinekuma",
-      password: "",
-      database: "invoiceapp",
-      entities: [
-        "dist/**/*.model.js"
-      ],
+      username: 'root',
+      password: 'root',
+      database: 'invoiceapp',
+      entities: ['dist/**/*.model.js'],
       synchronize: false,
-      uuidExtension: 'pgcrypto'
+      uuidExtension: 'pgcrypto',
     },
     test:  {
       type: "postgres",
