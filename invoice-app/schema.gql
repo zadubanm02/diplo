@@ -2,10 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Item {
+type ItemModel {
+  name: String!
   description: String!
   rate: Float!
-  quantity: Float!
+}
+
+type DeleteOutput {
+  raw: String!
+  affected: Float!
 }
 
 type InvoiceModel {
@@ -19,14 +24,19 @@ type InvoiceModel {
   issueDate: String!
   dueDate: String!
   note: String!
-  Items: [Item!]!
+  Items: [ItemQuantity!]!
   taxAmount: Float!
-  subTotal: Float!
+  subTotal: String!
   total: String!
-  amountPaid: Float!
-  outstandingBalance: Float!
+  amountPaid: String!
+  outstandingBalance: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type ItemQuantity {
+  quantity: Float!
+  item: ItemModel!
 }
 
 """
@@ -50,11 +60,15 @@ type Query {
   customers: [CustomerModel!]!
   invoice(id: String!): InvoiceModel!
   invoices: [InvoiceModel!]!
+  getItems: ItemModel!
+  getItemById(id: String!): ItemModel!
 }
 
 type Mutation {
   createCustomer(address: String, phone: String, email: String!, name: String!): CustomerModel!
   createInvoice(invoice: CreateInvoiceDTO!): InvoiceModel!
+  createItem(item: CreateItemDTO!): ItemModel!
+  deleteItemById(id: String!): DeleteOutput!
 }
 
 input CreateInvoiceDTO {
@@ -71,7 +85,12 @@ input CreateInvoiceDTO {
 }
 
 input ItemDTO {
+  id: String!
+  quantity: Float!
+}
+
+input CreateItemDTO {
+  name: String!
   description: String!
   rate: Float!
-  quantity: Float!
 }

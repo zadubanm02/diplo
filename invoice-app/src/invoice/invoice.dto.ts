@@ -4,13 +4,10 @@ import { InputType, Field } from "@nestjs/graphql";
 @InputType()
 class ItemDTO{
     @Field()
-    description: string;
+    id: string;
 
     @Field()
-    rate: number;
-
-    @Field()
-    quantity: number
+    quantity: number;
 }
 
 @InputType()
@@ -34,5 +31,8 @@ dueDate: Date;
 @Field()
 note: string;
 @Field(type => [ItemDTO])
-items: Array<{ description: string; rate: number; quantity: number }>;
+items: Array<ItemDTO>;
 }
+
+
+

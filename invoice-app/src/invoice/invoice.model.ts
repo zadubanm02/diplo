@@ -2,6 +2,7 @@
 import { CustomerModel } from './../customer/customer.model';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne, ChildEntity } from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
+import { ItemModel } from '../item/item.model';
 
 export enum Currency {
   NGN = "NGN",
@@ -9,22 +10,21 @@ export enum Currency {
   GBP = "GBP",
   EUR = " EUR"
 }
+
 export enum PaymentStatus {
   PAID = "PAID",
   NOT_PAID = "NOT_PAID",
 }
 
-@ObjectType()
-export class Item{
+@ObjectType({ isAbstract: true })
+export class ItemQuantity {
   @Field()
-  description: string;
+  quantity: number;
 
   @Field()
-  rate: number;
-
-  @Field()
-  quantity: number 
+  item:ItemModel
 }
+
 
 @ObjectType()
 @Entity()
@@ -77,36 +77,43 @@ export class InvoiceModel {
   @Column('text')
   note: string;
 
-  @Field( type => [Item])
+  @Field( type => [ItemQuantity])
   @Column({
     type: 'jsonb',
     array: false,
     default: [],
     nullable: false,
   })
-  Items: Item[];
+  Items: ItemQuantity[];
 
   @Column()
   @Field()
   taxAmount: number;
 
-  @Column()
+  @Column({
+    type: 'float',
+    default: 0.0,
+  })
   @Field()
-  subTotal: number;
+  subTotal: string;
 
-  @Column()
+  @Column({
+    type: 'float',
+    default: 0.0,
+  })
   @Field()
   total: string;
 
   @Column({
-    default: 0
+    type: 'float',
+    default: 0.0,
   })
   @Field()
-  amountPaid: number;
+  amountPaid: string;
 
-  @Column()
+  @Column({ type: 'float', default: 0.0 })
   @Field()
-  outstandingBalance: number;
+  outstandingBalance: string;
 
   @Field()
   @Column()
